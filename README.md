@@ -20,7 +20,7 @@ The characteristics of the created circuits can be modified with the following p
 -maxComp: maximum components per circuit (prevent huge simple parallel or serial circuits) def components / 3\
 -maxUseless: maximum shorted resistors def 3\
 -time: "t0"=evaluate at t0, "tInf": evaluate at settled state, default do both\
-//visual parameters\
+visual parameters:\
 -cWidth: width of components def 25\
 -cHeight: height of components def 50\
 -lines: length of vertical connections def 15\
