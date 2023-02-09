@@ -5,7 +5,7 @@ This program will create an image of a random RCL network and two textfiles, one
 and one with all voltages and currents that have to be calculated. The resulting files get numbered to prevent overwriting earlier results, a simple config file is crated to keep track of the numbering\
 The following assumptions are made:\
 -The voltage source is ideal\
--Capacitors have no resistance at t0 (immeadeately after voltage is applied) and infinite resistance at t->inf\
+-Capacitors have no resistance at t0 (immediately after voltage is applied) and infinite resistance at t->inf\
 -Inductors have infinite resistance at t0 and no resistance at t->inf
 
 # Parameters
