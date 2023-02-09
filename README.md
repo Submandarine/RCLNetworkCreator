@@ -24,3 +24,5 @@ visual parameters:\
 -cWidth: width of components def 25\
 -cHeight: height of components def 50\
 -lines: length of vertical connections def 15\
+
+Warning: -maxComp and -maxUseless are achieved by generating random networks and checking if the conditions are met so a very high component/maxUseless ratio leads to bad performance
