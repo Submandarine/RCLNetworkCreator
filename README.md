@@ -15,8 +15,8 @@ The characteristics of the created circuits can be modified with the following p
 -nInd: number of inductors def 1\
 -minPart: minimum resistance value def 5\
 -maxPart: maximum resistance value def 20\
--minV: minimum voltage def 1\
--maxV: maximum voltage def 10\
+-minV: minimum voltage def 2\
+-maxV: maximum voltage def 12\
 -maxComp: maximum components per circuit (prevent huge simple parallel or serial circuits) def components / 3\
 -maxUseless: maximum shorted resistors def 3\
 -time: "t0"=evaluate at t0, "tInf": evaluate at settled state, default do both\
