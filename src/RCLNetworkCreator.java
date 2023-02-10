@@ -5,10 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class RCLNetworkCreator extends JPanel {
     private static int frameWidth = 1000;
@@ -19,8 +16,8 @@ public class RCLNetworkCreator extends JPanel {
     private static int inductors = 1;
     private static int minPartValue = 5;
     private static int maxPartValue = 20;
-    private static int minVoltage = 1;
-    private static int maxVoltage = 10;
+    private static int minVoltage = 2;
+    private static int maxVoltage = 12;
     private static int maxComponentsPerCircuit = (resistors + capacitors + inductors) / 3;
     private static int maxUselessResistors = 3; //how many resistors are allowed to be shorted etc.
     private static String tConf = "both"; //evaluation time
@@ -45,14 +42,15 @@ public class RCLNetworkCreator extends JPanel {
 
         //save network
         boolean t0 = tConf.equals("t0");
-        saveValuesToFile(n, conf + " Task", true, false);
+        int voltage = (int) (Math.random() * (maxVoltage - minVoltage) + minVoltage);
+        saveValuesToFile(n, voltage, true, conf + " Task", false);
         if (tConf.equals("both"))
         {
-            saveValuesToFile(n, conf + " t0 Solution", true, true);
-            saveValuesToFile(n, conf + " tInf Solution", false, true);
+            saveValuesToFile(n, voltage, true, conf + " t0 Solution", true);
+            saveValuesToFile(n, voltage, false, conf + " tInf Solution", true);
         }
         else
-            saveValuesToFile(n, conf + " " + tConf + " Solution", t0, true);
+            saveValuesToFile(n, voltage, t0, conf + " " + tConf + " Solution", true);
         //show network
         /*
         JFrame frame = new JFrame();
@@ -240,8 +238,8 @@ public class RCLNetworkCreator extends JPanel {
         }
     }
 
-    public static void saveValuesToFile(Network n, String filename, boolean t0, boolean solution) {
-        int voltage = (int) (Math.random() * (maxVoltage - minVoltage) + minVoltage);
+    public static void saveValuesToFile(Network n, int voltage, boolean t0, String filename, boolean solution) {
+
         double resistance = Math.round(n.getResistance(t0) * 1000) / 1000.0;
         double current = Math.round(voltage / resistance * 1000) / 1000.0;
 
@@ -254,7 +252,9 @@ public class RCLNetworkCreator extends JPanel {
             else
                 writer.write(voltage + "V\n");
             HashMap<String, ArrayList<Double>> values = n.getValuesForParts(t0, voltage);
-            for (String key : values.keySet())
+            ArrayList<String> keys = new ArrayList<>(values.keySet());
+            Collections.sort(keys);
+            for (String key : keys)
             {
                 ArrayList<Double> al = values.get(key);
                 for (int i = 0; i < al.size(); i++)
